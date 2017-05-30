@@ -9,7 +9,12 @@
   </body>
   <script type="text/javascript">
     window.addEventListener('load', function() {
+      // setting up environment
       var canvas = document.querySelector('#canvas');
+      canvas.width = window.innerWidth - 20;
+      canvas.height = window.innerHeight - 20;
+      var context = canvas.getContext('2d');
+      document.body.appendChild(canvas);
     });
   </script>
 </html>
