@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pong</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div id="track" class="track">
+		<div class="paddle" id="paddle1" style="left:0; top:0"></div>
+	</div>
+
+	<div id="track2" class="track">
+		<div class="paddle" id="paddle2" style="left:0; bottom:0"></div>
+	</div>
+  
+	<script>
+
+	window.addEventListener('load', function(){
+
+		var paddle1 = document.getElementById('paddle1'),
+		boxleft, // left position of moving box
+		startx, // starting x coordinate of touch point
+		dist = 0, // distance traveled by touch point
+		touchobj = null // Touch object holder
+
+		paddle1.addEventListener('touchstart', function(e){
+			touchobj = e.changedTouches[0] // reference first touch point
+			boxleft = parseInt(paddle1.style.left) // get left position of box
+			startx = parseInt(touchobj.clientX) // get x coord of touch point
+			e.preventDefault() // prevent default click behavior
+		}, false)
+
+		paddle1.addEventListener('touchmove', function(e){
+			touchobj = e.changedTouches[0] // reference first touch point for this event
+			var dist = parseInt(touchobj.clientX) - startx // calculate dist traveled by touch point
+			// move box according to starting pos plus dist
+			// with lower limit 0 and upper limit 380 so it doesn't move outside track:
+			paddle1.style.left = ( (boxleft + dist > 380)? 380 : (boxleft + dist < 0)? 0 : boxleft + dist ) + 'px'
+			e.preventDefault()
+		}, false)
+
+		var paddle2 = document.getElementById('paddle2'),
+		boxleft, // left position of moving box
+		startx, // starting x coordinate of touch point
+		dist = 0, // distance traveled by touch point
+		touchobj = null // Touch object holder
+
+		paddle2.addEventListener('touchstart', function(e){
+			touchobj = e.changedTouches[0] // reference first touch point
+			boxleft = parseInt(paddle2.style.left) // get left position of box
+			startx = parseInt(touchobj.clientX) // get x coord of touch point
+			e.preventDefault() // prevent default click behavior
+		}, false)
+
+		paddle2.addEventListener('touchmove', function(e){
+			touchobj = e.changedTouches[0] // reference first touch point for this event
+			var dist = parseInt(touchobj.clientX) - startx // calculate dist traveled by touch point
+			// move box according to starting pos plus dist
+			// with lower limit 0 and upper limit 380 so it doesn't move outside track:
+			paddle2.style.left = ( (boxleft + dist > 380)? 380 : (boxleft + dist < 0)? 0 : boxleft + dist ) + 'px'
+			e.preventDefault()
+		}, false)
+
+	}, false)
+
+	</script>
+
+</body>
+</html>
