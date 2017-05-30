@@ -8,12 +8,15 @@
     <canvas id="canvas"></canvas>
   </body>
   <script type="text/javascript">
+  // variables
+  var canvas, context, playerOne, playerTwo, ball;
+
     window.addEventListener('load', function() {
       // setting up environment
-      var canvas = document.querySelector('#canvas');
+      canvas = document.querySelector('#canvas');
       canvas.width = window.innerWidth - 20;
       canvas.height = window.innerHeight - 20;
-      var context = canvas.getContext('2d');
+      context = canvas.getContext('2d');
       document.body.appendChild(canvas);
     });
   </script>
