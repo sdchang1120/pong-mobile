@@ -79,6 +79,18 @@
         // reverse the direction of ball
         this.vel.y *= -1;
       }
+
+      // if ball is moving to right & hits right paddle
+      if (this.vel.x > 0 && (this.x + this.side > (canvas.width - this.side) - playerOne.width)) {
+        // reverse the direction of ball
+        this.vel.x *= -1;
+      }
+      
+      // if ball is moving to left && hits left paddle
+      if (this.vel.x < 0 && (this.x + this.vel.x < (playerTwo.width + this.side))) {
+        // reverse the direction of ball
+        this.vel.x *= -1;
+      }
     },
     draw: function() {
       context.beginPath();
