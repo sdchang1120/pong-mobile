@@ -70,8 +70,11 @@
       this.x += this.vel.x;
       this.y += this.vel.y;
 
-      if (0 > this.x || this.x+this.side > canvas.width) {
-        this.vel.x *= -1;
+      // if ball goes beyond canvas in y-direction
+      if (0 > this.y || this.y+this.side > canvas.height) {
+        var offset = this.vel.y < 0 ? 0 - this.y : canvas.height - (this.y+this.side);
+        this.y += 2*offset;
+        this.vel.y *= -1;
       }
     },
     draw: function() {
@@ -124,8 +127,8 @@
     ball.y = (canvas.height - ball.side)/2;
 
     ball.vel = {
-      x: ball.speed,
-      y: 0
+      x: 0,
+      y: ball.speed
     }
   }
 
