@@ -8,16 +8,46 @@
     <canvas id="canvas"></canvas>
   </body>
   <script type="text/javascript">
-  // variables
+  // VARIABLES
   var canvas, context, playerOne, playerTwo, ball;
 
-    window.addEventListener('load', function() {
-      // setting up environment
-      canvas = document.querySelector('#canvas');
-      canvas.width = window.innerWidth - 20;
-      canvas.height = window.innerHeight - 20;
-      context = canvas.getContext('2d');
-      document.body.appendChild(canvas);
-    });
+  // OBJECTS
+  playerOne = {
+    x: 0,
+    y: 0,
+    width: 100,
+    height: 20,
+    //score: 0 /*implement later*/
+    draw: function() {
+      context.fillRect(this.x, this.y, this.width, this.height);
+    }
+  }
+  playerTwo = {
+    x: 0,
+    y: 0,
+    width: 100,
+    height: 20,
+    //score: 0 /*implement later*/
+    draw: function() {
+      context.fillRect(this.x, this.y, this.width, this.height);
+    }
+  }
+  ball = {
+    x: 0,
+    y: 0,
+    side: 10
+    draw: function() {
+      context.fillRect(this.x, this.y, this.width, this.height);
+    }
+  }
+
+  // SETUP
+  window.addEventListener('load', function() {
+    canvas = document.querySelector('#canvas');
+    canvas.width = window.innerWidth - 20;
+    canvas.height = window.innerHeight - 20;
+    context = canvas.getContext('2d');
+    document.body.appendChild(canvas);
+  });
   </script>
 </html>
