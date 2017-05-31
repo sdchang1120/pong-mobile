@@ -83,15 +83,13 @@
     draw: function() {
       context.beginPath();
       context.arc(this.x+5, this.y+5, this.radius, 0, 2*Math.PI, false); // gives ball its round shape
-      // context.fillRect(this.x, this.y, this.side, this.side);
-      context.fillStyle = 'red'; //ball trail not working
+      context.fillStyle = 'red';
       context.fill();
       context.closePath();
     }
   }
 
   // SETUP
-  // window.addEventListener('load', function() {
   function main() {
     canvas = document.querySelector('#canvas');
     canvas.width = window.innerWidth - 10;
