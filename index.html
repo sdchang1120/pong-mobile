@@ -64,7 +64,8 @@
     y: 0,
     side: 10,
     vel: null,
-    speed: 5,
+    speed: 1,
+    radius: 5,
     update: function() {
       this.x += this.vel.x;
       this.y += this.vel.y;
@@ -74,7 +75,12 @@
       }
     },
     draw: function() {
-      context.fillRect(this.x, this.y, this.side, this.side);
+      context.beginPath();
+      context.arc(this.x+5, this.y+5, this.radius, 0, 2*Math.PI, false);
+      // context.fillRect(this.x, this.y, this.side, this.side);
+      context.fillStyle = 'red'; //ball trail not working
+      context.fill();
+      context.closePath();
     }
   }
 
