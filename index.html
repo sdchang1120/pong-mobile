@@ -2,7 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
+    <style media="screen">
+      body {
+        padding:0;
+        margin:0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    </style>
   </head>
   <body>
     <canvas id="canvas"></canvas>
@@ -15,8 +26,8 @@
   playerOne = {
     x: 0,
     y: 0,
-    width: 100,
-    height: 20,
+    width: 10,
+    height: 75,
     //score: 0 /*implement later*/
     draw: function() {
       context.fillRect(this.x, this.y, this.width, this.height);
@@ -25,8 +36,8 @@
   playerTwo = {
     x: 0,
     y: 0,
-    width: 100,
-    height: 20,
+    width: 10,
+    height: 75,
     //score: 0 /*implement later*/
     draw: function() {
       context.fillRect(this.x, this.y, this.width, this.height);
@@ -35,19 +46,48 @@
   ball = {
     x: 0,
     y: 0,
-    side: 10
+    side: 10,
     draw: function() {
       context.fillRect(this.x, this.y, this.side, this.side);
     }
   }
 
   // SETUP
-  window.addEventListener('load', function() {
+  // window.addEventListener('load', function() {
+  function main() {
     canvas = document.querySelector('#canvas');
-    canvas.width = window.innerWidth - 20;
-    canvas.height = window.innerHeight - 20;
+    canvas.width = window.innerWidth - 10;
+    canvas.height = window.innerHeight - 10;
     context = canvas.getContext('2d');
     document.body.appendChild(canvas);
-  });
+
+    init(); // initiate game
+
+    var loop = function() {
+      draw();
+      window.requestAnimationFrame(loop, canvas);
+    }
+    window.requestAnimationFrame(loop, canvas);
+  }
+  // });
+
+  function init() {
+    playerOne.x = playerOne.width;
+    playerOne.y = (canvas.height - playerOne.height)/2;
+
+    playerTwo.x = canvas.width - (playerOne.width + playerTwo.width);
+    playerTwo.y = (canvas.height - playerTwo.height)/2;
+
+    ball.x = (canvas.width - ball.side)/2;
+    ball.y = (canvas.height - ball.side)/2;
+  }
+
+  function draw() {
+    playerOne.draw();
+    playerTwo.draw();
+    ball.draw();
+  }
+
+  main();
   </script>
 </html>
