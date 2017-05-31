@@ -67,19 +67,22 @@
     speed: 3,
     radius: 5,
     update: function() {
+      // update ball position with velocity
       this.x += this.vel.x;
       this.y += this.vel.y;
 
       // if ball goes beyond canvas in y-direction
       if (0 > this.y || this.y+this.side > canvas.height) {
+        // calculate in the offset on both ends of canvas
         var offset = this.vel.y < 0 ? 0 - this.y : canvas.height - (this.y+this.side);
         this.y += 2*offset;
+        // reverse the direction of ball
         this.vel.y *= -1;
       }
     },
     draw: function() {
       context.beginPath();
-      context.arc(this.x+5, this.y+5, this.radius, 0, 2*Math.PI, false);
+      context.arc(this.x+5, this.y+5, this.radius, 0, 2*Math.PI, false); // gives ball its round shape
       // context.fillRect(this.x, this.y, this.side, this.side);
       context.fillStyle = 'red'; //ball trail not working
       context.fill();
@@ -127,8 +130,8 @@
     ball.y = (canvas.height - ball.side)/2;
 
     ball.vel = {
-      x: 0,
-      y: ball.speed
+      x: ball.speed,
+      y: 0
     }
   }
 
