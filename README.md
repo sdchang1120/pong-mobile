@@ -19,4 +19,4 @@ A classic pong game for mobile
 3. Plain Old Vanilla JavaScript
 
 ## Resources
-- [Sound effects](www.freesound.org)
+- [Sound effects](http://www.freesound.org)
