@@ -137,6 +137,7 @@ ball = {
   }
 }
 
+// TOUCH EVENT LISTENER
 function touchEvent(event) {
   if (event.touches.length === 0) return;
   event.preventDefault();
