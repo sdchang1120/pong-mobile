@@ -132,7 +132,7 @@
         this.x < playerOne.x + playerOne.width &&
         this.y < playerOne.y + playerOne.height) {
 
-          // calculating deflections
+          // calculating deflections TODO: need to improve calculation
           var yoffset = Math.abs(this.y - playerOne.y);
           if (yoffset < (playerOne.height * .4)) {
             this.vel.y -= 1;
