@@ -72,8 +72,12 @@
   </body>
   <script type="text/javascript">
   // VARIABLES
-  var canvas, context, playerOne, playerOneScore, playerTwo, playerTwoScore, ball, keyState,
-  playBtn = document.querySelector('#play-btn');
+  var canvas, context, playerOne, playerTwo, ball, keyState,
+  playBtn = document.querySelector('#play-btn'),
+  playerOneScore = document.querySelector('#playerOneScore'),
+  playerTwoScore = document.querySelector('#playerTwoScore'),
+  volumeOnBtn = document.querySelector('#volume-on'),
+  volumeOffBtn = document.querySelector('#volume-off'),
   hitSound = document.querySelector('#hit-sound'),
   failureSound = document.querySelector('#failure-sound');
 
@@ -246,10 +250,7 @@
       y: 0
     }
 
-    playerOneScore = document.querySelector('#playerOneScore');
     playerOneScore.innerHTML = playerOne.score;
-
-    playerTwoScore = document.querySelector('#playerTwoScore');
     playerTwoScore.innerHTML = playerTwo.score;
   }
 
@@ -271,9 +272,27 @@
     context.restore();
   }
 
+  // VOLUME ON EVENT LISTENER
+  volumeOnBtn.addEventListener('click', function() {
+    hitSound.muted = true; // turn sound fx off
+    failureSound.muted = true; // turn sound fx off
+    volumeOnBtn.style.display = "none"; // hide volume on icon
+    volumeOffBtn.style.display = "block"; // display volume off icon
+  });
+
+  // VOLUME OFF EVENT LISTENER
+  volumeOffBtn.addEventListener('click', function() {
+    hitSound.muted = false; // turn sound fx off
+    failureSound.muted = false; // turn sound fx off
+    volumeOffBtn.style.display = "none"; // hide volume off icon
+    volumeOnBtn.style.display = "block"; // display volume on icon
+  });
+
+  // PLAY BTN TO START GAME
   playBtn.addEventListener('click', function() {
     welcome.remove();
     main();
   });
+
   </script>
 </html>
