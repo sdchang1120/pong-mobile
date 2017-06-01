@@ -141,17 +141,20 @@
     speed: 3,
     radius: 5,
     update: function() {
+      
       // update ball position with velocity
       this.x += this.vel.x;
       this.y += this.vel.y;
 
       // if ball goes beyond canvas in y-direction
       if (0 > this.y || this.y+this.side > canvas.height) {
+
         // calculate in the offset on both ends of canvas
         var offset = this.vel.y < 0 ? 0 - this.y : canvas.height - (this.y+this.side);
         this.y += 2*offset;
-        // reverse the direction of ball
-        this.vel.y *= -1;
+
+        hitSound.play();
+        this.vel.y *= -1; // reverse the direction of ball
       }
 
       // if ball is moving to right
@@ -163,7 +166,7 @@
         this.x < playerTwo.x + playerTwo.width &&
         this.y < playerTwo.y + playerTwo.height) {
 
-          // calculating deflections
+          // calculating deflections TODO: need to improve calculation
           var yoffset = Math.abs(this.y - playerTwo.y);
           if (yoffset < (playerTwo.height * .4)) {
             this.vel.y -= 1;
