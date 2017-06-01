@@ -1,5 +1,5 @@
 # Touch Pong
-A classic pong game for mobile
+A classic pong game for mobile. Play [here](https://sdchang1120.github.io/pong-mobile)
 
 ## Features
 - Touch-enabled
