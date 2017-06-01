@@ -17,6 +17,17 @@
         height: 100vh;
         font-size: 20px;
       }
+      #welcome {
+        position: absolute;
+      }
+      #play-btn {
+        border: 1px solid white;
+        color: white;
+        padding: 5px 10px;
+        background: black;
+        font-size: 20px;
+        letter-spacing: 5px;
+      }
       #playerOneScore {
         position: absolute;
         top: 20px;
@@ -41,19 +52,28 @@
   <body>
     <audio id="hit-sound"><source src="assets/hit.wav"></source></audio>
     <audio id="failure-sound"><source src="assets/failure.wav"></sounce></audio>
+
+    <section id="welcome">
+      <button id="play-btn">PLAY</button>
+    </section>
+
     <div id="playerOneScore"></div>
     <div id="playerTwoScore"></div>
+
     <div id="volume-on" class="volume">
       <i class="fa fa-volume-up" aria-hidden="true"></i>
     </div>
     <div id="volume-off" class="volume">
       <i class="fa fa-volume-off" aria-hidden="true"></i>
     </div>
+
     <canvas id="canvas"></canvas>
+
   </body>
   <script type="text/javascript">
   // VARIABLES
   var canvas, context, playerOne, playerOneScore, playerTwo, playerTwoScore, ball, keyState,
+  playBtn = document.querySelector('#play-btn');
   hitSound = document.querySelector('#hit-sound'),
   failureSound = document.querySelector('#failure-sound');
 
@@ -251,6 +271,9 @@
     context.restore();
   }
 
-  main();
+  playBtn.addEventListener('click', function() {
+    welcome.remove();
+    main();
+  });
   </script>
 </html>
