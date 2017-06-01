@@ -90,7 +90,7 @@ ball = {
         this.vel.x *= -1; // reverse direction of ball
       }
 
-      // if ball hits right way
+      // if ball hits right wall
       if (this.x > playerTwo.x) {
         failureSound.play();
         playerOne.score += 1; // player 1 scores a point
@@ -137,6 +137,25 @@ ball = {
   }
 }
 
+function touchEvent(event) {
+  if (event.touches.length === 0) return;
+  event.preventDefault();
+  event.stopPropagation();
+  var touch = event.touches[0];
+
+  // if user touches anywhere on the left half of the canvas (player 1's field),
+  // player 1 can move the paddle
+  if (touch.clientX <= canvas.width/2) {
+    playerOne.y = (touch.pageY - playerOne.height / 2);
+  }
+
+  // if user touches anywhere on the right half of the canvas (player 2's field),
+  // player 2 can move the paddle
+  if (touch.clientX >= canvas.width/2) {
+    playerTwo.y = (touch.pageY - playerTwo.height / 2);
+  }
+}
+
 // SETUP
 function main() {
   canvas = document.querySelector('#canvas');
@@ -153,6 +172,11 @@ function main() {
     delete keyState[event.keyCode];
   });
 
+  document.addEventListener('touchstart', touchEvent, true);
+  document.addEventListener('touchmove', touchEvent, true);
+  document.addEventListener('touchend', touchEvent, true);
+  document.addEventListener('touchcancel', touchEvent, true);
+
   init(); // initiate game
 
   var loop = function() {
@@ -162,7 +186,6 @@ function main() {
   }
   window.requestAnimationFrame(loop, canvas);
 }
-// });
 
 // INITIALIZE OBJS
 function init() {
