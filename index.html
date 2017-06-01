@@ -6,21 +6,37 @@
     <title></title>
     <style media="screen">
       body {
+        font-family: monospace;
         padding:0;
         margin:0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
+        font-size: 20px;
+      }
+      #playerOneScore {
+        color: white;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+      #playerTwoScore {
+        color: white;
+        position: absolute;
+        top: 20px;
+        right: 20px;
       }
     </style>
   </head>
   <body>
+    <div id="playerOneScore"></div>
+    <div id="playerTwoScore"></div>
     <canvas id="canvas"></canvas>
   </body>
   <script type="text/javascript">
   // VARIABLES
-  var canvas, context, playerOne, playerTwo, ball, keyState;
+  var canvas, context, playerOne, playerOneScore, playerTwo, playerTwoScore, ball, keyState;
 
   // OBJECTS
   playerOne = {
@@ -28,7 +44,7 @@
     y: 0,
     width: 10,
     height: 75,
-    //score: 0 /*implement later*/
+    score: 0,
     update: function() {
       if (keyState[87]) { // w key
         this.y -= 5
@@ -46,7 +62,7 @@
     y: 0,
     width: 10,
     height: 75,
-    //score: 0 /*implement later*/
+    score: 0,
     update: function() {
       if (keyState[38]) { // down arrow
         this.y -= 5
@@ -90,6 +106,11 @@
           // reverse direction of ball
           this.vel.x *= -1;
         }
+        if (this.x > playerTwo.x) {
+          playerOne.score += 1;
+          init();
+          console.log('player 1:', playerOne.score)
+        }
       }
       // if ball is moving to left
       if (this.vel.x < 0) {
@@ -100,6 +121,11 @@
         this.y < playerOne.y + playerOne.height) {
           // reverse direction of ball
           this.vel.x *= -1;
+        }
+        if (this.x <= playerOne.x) {
+          playerTwo.score += 1;
+          init();
+          console.log('player 2:', playerTwo.score);
         }
       }
 
@@ -155,6 +181,12 @@
       x: ball.speed,
       y: 0
     }
+
+    playerOneScore = document.querySelector('#playerOneScore');
+    playerOneScore.innerHTML = playerOne.score;
+
+    playerTwoScore = document.querySelector('#playerTwoScore');
+    playerTwoScore.innerHTML = playerTwo.score;
   }
 
   // UPDATE OBJS
