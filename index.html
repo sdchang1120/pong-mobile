@@ -21,6 +21,7 @@
         position: absolute;
       }
       #play-btn {
+        cursor: pointer;
         border: 1px solid white;
         color: white;
         padding: 5px 10px;
@@ -39,10 +40,19 @@
         right: 20px;
       }
       .volume {
+        font-family: 'Arial';
+        font-size: 12px;
         position: absolute;
         bottom: 20px;
         right: 20px;
         cursor: pointer;
+      }
+      .volume span {
+        display: none;
+        padding-right: 5px;
+      }
+      .volume:hover span {
+        display: inline-block;
       }
       #volume-off {
         display: none;
@@ -61,9 +71,11 @@
     <div id="playerTwoScore"></div>
 
     <div id="volume-on" class="volume">
+      <span>TURN OFF</span>
       <i class="fa fa-volume-up" aria-hidden="true"></i>
     </div>
     <div id="volume-off" class="volume">
+      <span>TURN ON</span>
       <i class="fa fa-volume-off" aria-hidden="true"></i>
     </div>
 
