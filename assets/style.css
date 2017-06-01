@@ -1,0 +1,54 @@
+body {
+  font-family: 'Arial';
+  color: white;
+  padding:0;
+  margin:0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 15px;
+  letter-spacing: 2px;
+}
+#welcome {
+  position: absolute;
+}
+#play-btn {
+  cursor: pointer;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  background: black;
+  font-size: 20px;
+  letter-spacing: 5px;
+}
+#playerOneScore {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+#playerTwoScore {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.volume {
+  font-size: 20px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.volume span {
+  font-size: 12px;
+  display: none;
+  padding-right: 5px;
+}
+.volume:hover span {
+  display: inline-block;
+}
+#volume-off {
+  display: none;
+}
