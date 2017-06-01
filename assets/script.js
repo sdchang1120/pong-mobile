@@ -145,13 +145,13 @@ function touchEvent(event) {
 
   // if user touches anywhere on the left half of the canvas (player 1's field),
   // player 1 can move the paddle
-  if (touch.clientX <= canvas.width/2) {
+  if (touch.clientX <= canvas.width/2 - 15) {
     playerOne.y = (touch.pageY - playerOne.height / 2);
   }
 
   // if user touches anywhere on the right half of the canvas (player 2's field),
   // player 2 can move the paddle
-  if (touch.clientX >= canvas.width/2) {
+  if (touch.clientX >= canvas.width/2 + 15) {
     playerTwo.y = (touch.pageY - playerTwo.height / 2);
   }
 }
