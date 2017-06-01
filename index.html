@@ -31,10 +31,10 @@
     //score: 0 /*implement later*/
     update: function() {
       if (keyState[87]) { // w key
-        this.y -= 5
+        this.y -= 1
       };
       if (keyState[83]) { // s key
-        this.y += 5
+        this.y += 1
       };
     },
     draw: function() {
@@ -49,10 +49,10 @@
     //score: 0 /*implement later*/
     update: function() {
       if (keyState[38]) { // down arrow
-        this.y -= 5
+        this.y -= 1
       };
       if (keyState[40]) { // up arrow
-        this.y += 5
+        this.y += 1
       };
     },
     draw: function() {
@@ -64,7 +64,7 @@
     y: 0,
     side: 10,
     vel: null,
-    speed: 3,
+    speed: 1,
     radius: 5,
     update: function() {
       // update ball position with velocity
@@ -80,17 +80,29 @@
         this.vel.y *= -1;
       }
 
-      // if ball is moving to right & hits right paddle
-      if (this.vel.x > 0 && (this.x + this.side > (canvas.width - this.side) - playerOne.width)) {
-        // reverse the direction of ball
-        this.vel.x *= -1;
+      // if ball is moving to right
+      if (this.vel.x > 0) {
+        // if ball hits player 2's paddle
+        if (playerTwo.x < this.x + this.side &&
+        playerTwo.y < this.y + this.side &&
+        this.x < playerTwo.x + playerTwo.width &&
+        this.y < playerTwo.y + playerTwo.height) {
+          // reverse direction of ball
+          this.vel.x *= -1;
+        }
       }
-      
-      // if ball is moving to left && hits left paddle
-      if (this.vel.x < 0 && (this.x + this.vel.x < (playerTwo.width + this.side))) {
-        // reverse the direction of ball
-        this.vel.x *= -1;
+      // if ball is moving to left
+      if (this.vel.x < 0) {
+        // if ball hits player 1's paddle
+        if (playerOne.x < this.x + this.side &&
+        playerOne.y < this.y + this.side &&
+        this.x < playerOne.x + playerOne.width &&
+        this.y < playerOne.y + playerOne.height) {
+          // reverse direction of ball
+          this.vel.x *= -1;
+        }
       }
+
     },
     draw: function() {
       context.beginPath();
