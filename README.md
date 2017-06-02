@@ -7,7 +7,7 @@ A classic pong game for mobile. Play [here](https://sdchang1120.github.io/pong-m
 - Scoreboard
 - Android & Apple compatible 🙌
 
-## How to Play (on mobile)
+## How to Play
 1. Grab a friend to play with
 2. Click the `PLAY` button to start game
 3. Move paddle and hit the ball to your opponent
