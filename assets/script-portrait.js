@@ -1,14 +1,14 @@
 // VARIABLES
 var playerOne, playerTwo, ball, keyState,
-canvas = document.querySelector('#canvas'),
-context = canvas.getContext('2d'),
-playBtn = document.querySelector('#play-btn'),
-playerOneScore = document.querySelector('#playerOneScore'),
-playerTwoScore = document.querySelector('#playerTwoScore'),
-volumeOnBtn = document.querySelector('#volume-on'),
-volumeOffBtn = document.querySelector('#volume-off'),
-hitSound = document.querySelector('#hit-sound'),
-failureSound = document.querySelector('#failure-sound');
+    canvas = document.querySelector('#canvas'),
+    context = canvas.getContext('2d'),
+    playBtn = document.querySelector('#play-btn'),
+    playerOneScore = document.querySelector('#playerOneScore'),
+    playerTwoScore = document.querySelector('#playerTwoScore'),
+    volumeOnBtn = document.querySelector('#volume-on'),
+    volumeOffBtn = document.querySelector('#volume-off'),
+    hitSound = document.querySelector('#hit-sound'),
+    failureSound = document.querySelector('#failure-sound');
 
 // OBJECTS
 playerOne = {
