@@ -4,19 +4,20 @@ A classic pong game for mobile. Play [here](https://sdchang1120.github.io/pong-m
 ## Features
 - Touch-enabled
 - Sound effects (click on volume button to turn off sound)
-- Choose from 4 Levels
+- Choose from 4 levels
 - Scoreboard
 - Android & Apple compatible 🙌
 
 ## How to Play
 1. Grab a friend to play with
 2. Click the `PLAY` button to start game
-3. Move paddle and hit the ball to your opponent
+3. Choose from 4 levels
+4. Move paddle and hit the ball to your opponent
  - On mobile: Touch and drag paddle (or anywhere on the your half of the playing field)
  - On computer: Use `A` & `D` [Player 1] & `←` (left arrow) & `→` (right arrow) [Player 2] to move paddle left and right
  - (On landscape mode: Use `W` & `S` [Player 1] & `↑` (up arrow) & `↓`(down arrow) [Player 2] to move paddle up and down)
-4. If you miss the ball, your opponent scores a point
-5. Keep playing until you get tired
+5. If you miss the ball, your opponent scores a point
+6. Keep playing until you get tired
 
 ## Tech Used
 1. HTML5 / Canvas
