@@ -19,21 +19,38 @@ body {
   align-items: center;
   justify-content: center;
 }
-#welcome {
+#welcome, #game-lvls {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 0;
   right: 0;
   text-align: center;
 }
-#play-btn {
+.modal h1, .modal h3 {
+  color: black;
+  font-weight: 100;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+#game-lvls {
+  display: none;
+  top: 32%;
+}
+.btn {
   cursor: pointer;
   border: 1px solid white;
   color: white;
   padding: 5px 10px;
+  margin: 5px auto;
   background: black;
   font-size: 20px;
   letter-spacing: 5px;
+}
+.btn:hover {
+  background: red;
+}
+.btn.level {
+  display: block;
 }
 #playerOneScore {
   position: absolute;

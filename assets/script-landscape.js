@@ -2,7 +2,10 @@
 var playerOne, playerTwo, ball, keyState,
     canvas = document.querySelector('#canvas'),
     context = canvas.getContext('2d'),
+    welcome = document.querySelector('#welcome'),
     playBtn = document.querySelector('#play-btn'),
+    gameLvls = document.querySelector('#game-lvls'),
+    lvlBtns = document.querySelectorAll('.level'),
     playerOneScore = document.querySelector('#playerOneScore'),
     playerTwoScore = document.querySelector('#playerTwoScore'),
     volumeOnBtn = document.querySelector('#volume-on'),
@@ -242,8 +245,31 @@ volumeOffBtn.addEventListener('click', function() {
   volumeOnBtn.style.display = "block"; // display volume on icon
 });
 
+// GAME LEVEL CLICK EVENT
+for (var i=0; i<lvlBtns.length; i++) {
+  lvlBtns[i].addEventListener('click', function() {
+    if (this.id === 'lvl-easy') {
+      ball.speed = 3;
+      console.log(ball.speed);
+    } else if (this.id === 'lvl-med') {
+      ball.speed = 5;
+      console.log(ball.speed);
+    } else if (this.id === 'lvl-hard') {
+      ball.speed = 10;
+      console.log(ball.speed);
+    } else if (this.id === 'lvl-imp') {
+      ball.speed = 20;
+      console.log(ball.speed);
+    }
+    gameLvls.remove();
+    main();
+  })
+
+}
+
 // PLAY BTN TO START GAME
 playBtn.addEventListener('click', function() {
+  document.body.classList.add('portrait');
+  gameLvls.style.display = "block";
   welcome.remove();
-  main();
 });
