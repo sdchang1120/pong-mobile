@@ -4,7 +4,7 @@ A classic pong game for mobile. Play [here](https://sdchang1120.github.io/pong-m
 ## Features
 - Touch-enabled
 - Sound effects (click on volume button to turn off sound)
-- Choose from 4 levels
+- 4 game levels
 - Scoreboard
 - Android & Apple compatible 🙌
 
