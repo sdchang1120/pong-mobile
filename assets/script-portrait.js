@@ -190,13 +190,9 @@ function main() {
 
 // INITIALIZE OBJS
 function init() {
-  // playerOne.x = playerOne.width;
-  // playerOne.y = (canvas.height - playerOne.height)/2;
   playerOne.x = (canvas.width - playerOne.width)/2;
   playerOne.y = playerOne.height;
 
-  // playerTwo.x = canvas.width - (playerOne.width + playerTwo.width);
-  // playerTwo.y = (canvas.height - playerTwo.height)/2;
   playerTwo.x = (canvas.width - playerTwo.width)/2;
   playerTwo.y = canvas.height - (playerTwo.height + playerOne.height);
 
@@ -248,6 +244,7 @@ volumeOffBtn.addEventListener('click', function() {
 
 // PLAY BTN TO START GAME
 playBtn.addEventListener('click', function() {
+  document.body.classList.add('portrait');
   welcome.remove();
   main();
 });
