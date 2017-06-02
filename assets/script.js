@@ -1,28 +1,28 @@
 // VARIABLES
 var playerOne, playerTwo, ball, keyState,
-canvas = document.querySelector('#canvas'),
-context = canvas.getContext('2d'),
-playBtn = document.querySelector('#play-btn'),
-playerOneScore = document.querySelector('#playerOneScore'),
-playerTwoScore = document.querySelector('#playerTwoScore'),
-volumeOnBtn = document.querySelector('#volume-on'),
-volumeOffBtn = document.querySelector('#volume-off'),
-hitSound = document.querySelector('#hit-sound'),
-failureSound = document.querySelector('#failure-sound');
+    canvas = document.querySelector('#canvas'),
+    context = canvas.getContext('2d'),
+    playBtn = document.querySelector('#play-btn'),
+    playerOneScore = document.querySelector('#playerOneScore'),
+    playerTwoScore = document.querySelector('#playerTwoScore'),
+    volumeOnBtn = document.querySelector('#volume-on'),
+    volumeOffBtn = document.querySelector('#volume-off'),
+    hitSound = document.querySelector('#hit-sound'),
+    failureSound = document.querySelector('#failure-sound');
 
 // OBJECTS
 playerOne = {
   x: 0,
   y: 0,
-  width: 75,
-  height: 10,
+  width: 10,
+  height: 75,
   score: 0,
   update: function() {
-    if (keyState[65]) { // a key
-      this.x -= 5
+    if (keyState[87]) { // w key
+      this.y -= 5
     };
-    if (keyState[68]) { // d key
-      this.x += 5
+    if (keyState[83]) { // s key
+      this.y += 5
     };
   },
   draw: function() {
@@ -32,15 +32,15 @@ playerOne = {
 playerTwo = {
   x: 0,
   y: 0,
-  width: 75,
-  height: 10,
+  width: 10,
+  height: 75,
   score: 0,
   update: function() {
-    if (keyState[37]) { // left arrow
-      this.x -= 5
+    if (keyState[38]) { // down arrow
+      this.y -= 5
     };
-    if (keyState[39]) { // right arrow
-      this.x += 5
+    if (keyState[40]) { // up arrow
+      this.y += 5
     };
   },
   draw: function() {
@@ -60,69 +60,69 @@ ball = {
     this.x += this.vel.x;
     this.y += this.vel.y;
 
-    // if ball goes beyond canvas in x-direction
-    if (0 > this.x || this.x+this.side > canvas.width) {
+    // if ball goes beyond canvas in y-direction
+    if (0 > this.y || this.y+this.side > canvas.height) {
 
       // calculate in the offset on both ends of canvas
-      var offset = this.vel.x < 0 ? 0 - this.x : canvas.width - (this.x+this.side);
-      this.x += 2*offset;
+      var offset = this.vel.y < 0 ? 0 - this.y : canvas.height - (this.y+this.side);
+      this.y += 2*offset;
 
       hitSound.play();
-      this.vel.x *= -1; // reverse the direction of ball
+      this.vel.y *= -1; // reverse the direction of ball
     }
 
-    // if ball is moving down
-    if (this.vel.y > 0) {
+    // if ball is moving to right
+    if (this.vel.x > 0) {
 
       // if ball hits player 2's paddle
-      if (playerTwo.y < this.y + this.side &&
-      playerTwo.x < this.x + this.side &&
-      this.y < playerTwo.y + playerTwo.height &&
-      this.x < playerTwo.x + playerTwo.width) {
+      if (playerTwo.x < this.x + this.side &&
+          playerTwo.y < this.y + this.side &&
+          this.x < playerTwo.x + playerTwo.width &&
+          this.y < playerTwo.y + playerTwo.height) {
 
         // calculating deflections TODO: need to improve calculation
-        var xoffset = Math.abs(this.x - playerTwo.x);
-        if (xoffset < (playerTwo.width * .4)) {
-          this.vel.x -= 1;
-        } else if (xoffset >= (playerTwo.width * .6)) {
-          this.vel.x += 1;
+        var yoffset = Math.abs(this.y - playerTwo.y);
+        if (yoffset < (playerTwo.height * .4)) {
+          this.vel.y -= 1;
+        } else if (yoffset >= (playerTwo.height * .6)) {
+          this.vel.y += 1;
         }
 
         hitSound.play();
-        this.vel.y *= -1; // reverse direction of ball
+        this.vel.x *= -1; // reverse direction of ball
       }
 
       // if ball hits right wall
-      if (this.y > playerTwo.y) {
+      if (this.x > playerTwo.x) {
         failureSound.play();
         playerOne.score += 1; // player 1 scores a point
         init(); // restart game
       }
     }
 
-    // if ball is moving up
-    if (this.vel.y < 0) {
+    // if ball is moving to left
+    if (this.vel.x < 0) {
 
       // if ball hits player 1's paddle
-      if (playerOne.y < this.y + this.side &&
-      playerOne.x < this.x + this.side &&
-      this.y < playerOne.y + playerOne.height &&
-      this.x < playerOne.x + playerOne.width) {
+      if (playerOne.x < this.x + this.side &&
+          playerOne.y < this.y + this.side &&
+          this.x < playerOne.x + playerOne.width &&
+          this.y < playerOne.y + playerOne.height) {
 
         // calculating deflections TODO: need to improve calculation
-        var xoffset = Math.abs(this.x - playerOne.x);
-        if (xoffset < (playerOne.width * .4)) {
-          this.vel.x -= 1;
-        } else if (xoffset >= (playerOne.width * .6)) {
-          this.vel.x += 1;
+        var yoffset = Math.abs(this.y - playerOne.y);
+        if (yoffset < (playerOne.height * .4)) {
+          this.vel.y -= 1;
+        } else if (yoffset >= (playerOne.height * .6)) {
+          this.vel.y += 1;
         }
 
         hitSound.play();
-        this.vel.y *= -1; // reverse direction of ball
+        this.vel.x *= -1; // reverse direction of ball
       }
 
       // if ball hits left wall
-      if (this.y <= playerOne.y) {
+      if (this.x <= playerOne.x) {
         failureSound.play();
         playerTwo.score += 1; // player 2 scores a point
         init(); // restart game
@@ -148,14 +148,14 @@ function touchEvent(event) {
 
   // if user touches anywhere on the left half of the canvas (player 1's field),
   // player 1 can move the paddle
-  if (touch.clientY <= canvas.height/2 - 15) {
-    playerOne.x = (touch.pageX - playerOne.width / 2);
+  if (touch.clientX <= canvas.width/2 - 15) {
+    playerOne.y = (touch.pageY - playerOne.height / 2);
   }
 
   // if user touches anywhere on the right half of the canvas (player 2's field),
   // player 2 can move the paddle
-  if (touch.clientY >= canvas.height/2 + 15) {
-    playerTwo.x = (touch.pageX - playerTwo.width / 2);
+  if (touch.clientX >= canvas.width/2 + 15) {
+    playerTwo.y = (touch.pageY - playerTwo.height / 2);
   }
 }
 
@@ -190,18 +190,18 @@ function main() {
 
 // INITIALIZE OBJS
 function init() {
-  playerOne.x = (canvas.width - playerOne.width)/2;
-  playerOne.y = playerOne.height;
+  playerOne.x = playerOne.width;
+  playerOne.y = (canvas.height - playerOne.height)/2;
 
-  playerTwo.x = (canvas.width - playerTwo.width)/2;
-  playerTwo.y = canvas.height - (playerTwo.height + playerOne.height);
+  playerTwo.x = canvas.width - (playerOne.width + playerTwo.width);
+  playerTwo.y = (canvas.height - playerTwo.height)/2;
 
   ball.x = (canvas.width - ball.side)/2;
   ball.y = (canvas.height - ball.side)/2;
 
   ball.vel = {
-    x: 0,
-    y: ball.speed
+    x: ball.speed,
+    y: 0
   }
 
   playerOneScore.innerHTML = 'PLAYER 1: ' + playerOne.score;
@@ -247,13 +247,3 @@ playBtn.addEventListener('click', function() {
   welcome.remove();
   main();
 });
-
-function handleOrientation() {
-  if (window.innerHeight > window.innerWidth) {
-    document.body.classList.add('portrait');
-  } else {
-
-  }
-}
-
-window.addEventListener("deviceorientation", handleOrientation, true);

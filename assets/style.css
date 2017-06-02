@@ -37,18 +37,18 @@ body {
 }
 #playerOneScore {
   position: absolute;
-  top: 30px;
+  top: 20px;
   left: 20px;
 }
 #playerTwoScore {
   position: absolute;
-  bottom: 30px;
-  left: 20px;
+  top: 20px;
+  right: 20px;
 }
 .volume {
   font-size: 20px;
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
   cursor: pointer;
   margin: 0 auto;
   left: 40%;
@@ -63,16 +63,24 @@ body {
 .volume:hover span {
   display: inline-block;
 }
-.portrait .volume {
-  right: 20px;
-  left: auto;
-}
 #volume-off {
   display: none;
 }
 
-@media only screen and (max-width: 500px) {
-  .volume span {
-    display: none;
-  }
+/* PORTRAIT STYLE ADJUSTMENTS */
+.portrait #playerOneScore {
+  top: 30px;
+}
+.portrait #playerTwoScore {
+  top:auto;
+  bottom: 30px;
+  left: 20px;
+}
+.portrait .volume {
+  right: 20px;
+  bottom: 30px;
+  left: auto;
+}
+.portrait .volume span {
+  display: none;
 }
