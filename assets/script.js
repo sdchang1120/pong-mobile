@@ -1,5 +1,7 @@
 // VARIABLES
-var canvas, context, playerOne, playerTwo, ball, keyState,
+var playerOne, playerTwo, ball, keyState,
+canvas = document.querySelector('#canvas'),
+context = canvas.getContext('2d'),
 playBtn = document.querySelector('#play-btn'),
 playerOneScore = document.querySelector('#playerOneScore'),
 playerTwoScore = document.querySelector('#playerTwoScore'),
@@ -159,10 +161,8 @@ function touchEvent(event) {
 
 // SETUP
 function main() {
-  canvas = document.querySelector('#canvas');
   canvas.width = window.innerWidth - 10;
   canvas.height = window.innerHeight - 10;
-  context = canvas.getContext('2d');
   document.body.appendChild(canvas);
 
   keyState = {}; // TODO: Use touchstart, touchmove, touchend event listeners
