@@ -19,10 +19,9 @@ A classic pong game for mobile. Play [here](https://sdchang1120.github.io/pong-m
 3. Plain Old Vanilla JavaScript
 
 ## Improvements
-- Fixing position issues with flexbox on Safari (iPhone devices)
+- ~~Fixing position issues with flexbox on Safari (iPhone devices)~~
 - Adding multi-touch sensitivity
-- Making game orientation aware
-- Style improvements: adding particles
+- Making game orientation aware (almost)
 
 ## Resources
 - [Sound effects](http://www.freesound.org)
