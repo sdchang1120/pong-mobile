@@ -250,21 +250,16 @@ for (var i=0; i<lvlBtns.length; i++) {
   lvlBtns[i].addEventListener('click', function() {
     if (this.id === 'lvl-easy') {
       ball.speed = 3;
-      console.log(ball.speed);
     } else if (this.id === 'lvl-med') {
       ball.speed = 5;
-      console.log(ball.speed);
     } else if (this.id === 'lvl-hard') {
-      ball.speed = 10;
-      console.log(ball.speed);
+      ball.speed = 7;
     } else if (this.id === 'lvl-imp') {
-      ball.speed = 20;
-      console.log(ball.speed);
+      ball.speed = 9; // ball speed >= 10 automatically scores point for opponent
     }
     gameLvls.remove();
     main();
   })
-
 }
 
 // PLAY BTN TO START GAME
