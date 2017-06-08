@@ -42,7 +42,6 @@ Ball.prototype.draw = function() {
 };
 Ball.prototype.update = function() {
 
-  // update ball position with velocity
   this.x += this.vel.x;
   this.y += this.vel.y;
 
@@ -165,7 +164,7 @@ function main() {
   canvas.height = window.innerHeight - 10;
   document.body.appendChild(canvas);
 
-  keyState = {}; // TODO: Use touchstart, touchmove, touchend event listeners
+  keyState = {};
   document.addEventListener('keydown', function(event) {
     keyState[event.keyCode] = true;
   });
