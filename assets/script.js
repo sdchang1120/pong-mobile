@@ -1,3 +1,5 @@
+'use strict';
+
 // VARIABLES
 var playerOne, playerTwo, ball, keyState,
     canvas = document.querySelector('#canvas'),
@@ -13,107 +15,110 @@ var playerOne, playerTwo, ball, keyState,
     hitSound = document.querySelector('#hit-sound'),
     failureSound = document.querySelector('#failure-sound');
 
-// PLAYER AND BALL CONSTRUCTOR FUNCTIONS
-function Player(x, y, width, height, score) {
-  this.x = x;
-  this.y = y;
-  this.width = width;
-  this.height = height;
-  this.score = 0;
-  this.draw = function() {
+// PLAYER AND BALL CLASS CONSTRUCTORS
+class Player {
+  constructor(x, y, width, height, score) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.score = 0;
+  }
+  draw() {
     context.fillRect(this.x, this.y, this.width, this.height);
   }
-};
+}
 
-function Ball(x, y, side, vel, speed, radius, color) {
-  this.x = x;
-  this.y = y;
-  this.side = side;
-  this.vel = vel;
-  this.speed = speed;
-  this.radius = radius;
-  this.color = color;
-  this.draw = function() {
+class Ball {
+  constructor(x, y, side, vel, speed, radius, color) {
+    this.x = x;
+    this.y = y;
+    this.side = side;
+    this.vel = vel;
+    this.speed = speed;
+    this.radius = radius;
+    this.color = color;
+  }
+  draw() {
     context.beginPath();
     context.arc(this.x+5, this.y+5, this.radius, 0, 2*Math.PI, false); // gives ball its round shape
     context.fillStyle = this.color;
     context.fill();
     context.closePath();
   }
-};
+  update() {
 
-Ball.prototype.update = function() {
+    this.x += this.vel.x;
+    this.y += this.vel.y;
 
-  this.x += this.vel.x;
-  this.y += this.vel.y;
+    // if ball goes beyond canvas in x-direction
+    if (0 > this.x || this.x+this.side > canvas.width) {
 
-  // if ball goes beyond canvas in x-direction
-  if (0 > this.x || this.x+this.side > canvas.width) {
-
-    // calculate in the offset on both ends of canvas
-    var offset = this.vel.x < 0 ? 0 - this.x : canvas.width - (this.x+this.side);
-    this.x += 2*offset;
-    hitSound.play();
-    this.vel.x *= -1; // reverse the direction of ball
-  }
-
-  // if ball is moving down
-  if (this.vel.y > 0) {
-
-    // if ball hits player 2's paddle
-    if (playerTwo.y < this.y + this.side &&
-    playerTwo.x < this.x + this.side &&
-    this.y < playerTwo.y + playerTwo.height &&
-    this.x < playerTwo.x + playerTwo.width) {
-
-      // calculating deflections TODO: need to improve calculation
-      var xoffset = Math.abs(this.x - playerTwo.x);
-      if (xoffset < (playerTwo.width * .4)) {
-        this.vel.x -= 1;
-      } else if (xoffset >= (playerTwo.width * .6)) {
-        this.vel.x += 1;
-      }
+      // calculate in the offset on both ends of canvas
+      var offset = this.vel.x < 0 ? 0 - this.x : canvas.width - (this.x+this.side);
+      this.x += 2*offset;
       hitSound.play();
-      this.vel.y *= -1; // reverse direction of ball
+      this.vel.x *= -1; // reverse the direction of ball
     }
 
-    // if ball hits right wall
-    if (this.y > playerTwo.y) {
-      failureSound.play();
-      playerOne.score += 1; // player 1 scores a point
-      init(); // restart game
-    }
-  }
+    // if ball is moving down
+    if (this.vel.y > 0) {
 
-  // if ball is moving up
-  if (this.vel.y < 0) {
+      // if ball hits player 2's paddle
+      if (playerTwo.y < this.y + this.side &&
+      playerTwo.x < this.x + this.side &&
+      this.y < playerTwo.y + playerTwo.height &&
+      this.x < playerTwo.x + playerTwo.width) {
 
-    // if ball hits player 1's paddle
-    if (playerOne.y < this.y + this.side &&
-    playerOne.x < this.x + this.side &&
-    this.y < playerOne.y + playerOne.height &&
-    this.x < playerOne.x + playerOne.width) {
-
-      // calculating deflections TODO: need to improve calculation
-      var xoffset = Math.abs(this.x - playerOne.x);
-      if (xoffset < (playerOne.width * .4)) {
-        this.vel.x -= 1;
-      } else if (xoffset >= (playerOne.width * .6)) {
-        this.vel.x += 1;
+        // calculating deflections TODO: need to improve calculation
+        var xoffset = Math.abs(this.x - playerTwo.x);
+        if (xoffset < (playerTwo.width * .4)) {
+          this.vel.x -= 1;
+        } else if (xoffset >= (playerTwo.width * .6)) {
+          this.vel.x += 1;
+        }
+        hitSound.play();
+        this.vel.y *= -1; // reverse direction of ball
       }
-      hitSound.play();
-      this.vel.y *= -1; // reverse direction of ball
+
+      // if ball hits right wall
+      if (this.y > playerTwo.y) {
+        failureSound.play();
+        playerOne.score += 1; // player 1 scores a point
+        init(); // restart game
+      }
     }
 
-    // if ball hits left wall
-    if (this.y <= playerOne.y) {
-      failureSound.play();
-      playerTwo.score += 1; // player 2 scores a point
-      init(); // restart game
-    }
-  }
+    // if ball is moving up
+    if (this.vel.y < 0) {
 
-};
+      // if ball hits player 1's paddle
+      if (playerOne.y < this.y + this.side &&
+      playerOne.x < this.x + this.side &&
+      this.y < playerOne.y + playerOne.height &&
+      this.x < playerOne.x + playerOne.width) {
+
+        // calculating deflections TODO: need to improve calculation
+        var xoffset = Math.abs(this.x - playerOne.x);
+        if (xoffset < (playerOne.width * .4)) {
+          this.vel.x -= 1;
+        } else if (xoffset >= (playerOne.width * .6)) {
+          this.vel.x += 1;
+        }
+        hitSound.play();
+        this.vel.y *= -1; // reverse direction of ball
+      }
+
+      // if ball hits left wall
+      if (this.y <= playerOne.y) {
+        failureSound.play();
+        playerTwo.score += 1; // player 2 scores a point
+        init(); // restart game
+      }
+    }
+
+  };
+}
 
 // CREATING PLAYERS AND BALL OBJECTS
 playerOne = new Player(0, 0, 75, 10, 0);
@@ -128,6 +133,7 @@ playerOne.update = function() {
     this.x += 5
   };
 };
+
 playerTwo.update = function() {
   if (keyState[37]) { // left arrow
     this.x -= 5
