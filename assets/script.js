@@ -20,26 +20,28 @@ function Player(x, y, width, height, score) {
   this.width = width;
   this.height = height;
   this.score = 0;
-};
-Player.prototype.draw = function() {
-  context.fillRect(this.x, this.y, this.width, this.height);
+  this.draw = function() {
+    context.fillRect(this.x, this.y, this.width, this.height);
+  }
 };
 
-function Ball(x, y, side, vel, speed, radius) {
+function Ball(x, y, side, vel, speed, radius, color) {
   this.x = x;
   this.y = y;
   this.side = side;
   this.vel = vel;
   this.speed = speed;
   this.radius = radius;
+  this.color = color;
+  this.draw = function() {
+    context.beginPath();
+    context.arc(this.x+5, this.y+5, this.radius, 0, 2*Math.PI, false); // gives ball its round shape
+    context.fillStyle = this.color;
+    context.fill();
+    context.closePath();
+  }
 };
-Ball.prototype.draw = function() {
-  context.beginPath();
-  context.arc(this.x+5, this.y+5, this.radius, 0, 2*Math.PI, false); // gives ball its round shape
-  context.fillStyle = 'red';
-  context.fill();
-  context.closePath();
-};
+
 Ball.prototype.update = function() {
 
   this.x += this.vel.x;
@@ -51,7 +53,6 @@ Ball.prototype.update = function() {
     // calculate in the offset on both ends of canvas
     var offset = this.vel.x < 0 ? 0 - this.x : canvas.width - (this.x+this.side);
     this.x += 2*offset;
-
     hitSound.play();
     this.vel.x *= -1; // reverse the direction of ball
   }
@@ -72,7 +73,6 @@ Ball.prototype.update = function() {
       } else if (xoffset >= (playerTwo.width * .6)) {
         this.vel.x += 1;
       }
-
       hitSound.play();
       this.vel.y *= -1; // reverse direction of ball
     }
@@ -101,7 +101,6 @@ Ball.prototype.update = function() {
       } else if (xoffset >= (playerOne.width * .6)) {
         this.vel.x += 1;
       }
-
       hitSound.play();
       this.vel.y *= -1; // reverse direction of ball
     }
@@ -119,7 +118,7 @@ Ball.prototype.update = function() {
 // CREATING PLAYERS AND BALL OBJECTS
 playerOne = new Player(0, 0, 75, 10, 0);
 playerTwo = new Player (0, 0, 75, 10, 0);
-ball = new Ball(0, 0, 10, null, 3, 5);
+ball = new Ball(0, 0, 10, null, 3, 5, 'red');
 
 playerOne.update = function() {
   if (keyState[65]) { // a key
