@@ -142,13 +142,13 @@ function touchEvent(event) {
   event.stopPropagation();
   var touch = event.touches[0];
 
-  // if user touches anywhere on the left half of the canvas (player 1's field),
+  // if user touches anywhere on the top half of the canvas (player 1's field),
   // player 1 can move the paddle
   if (touch.clientY <= canvas.height/2 - 15) {
     playerOne.x = (touch.pageX - playerOne.width / 2);
   }
 
-  // if user touches anywhere on the right half of the canvas (player 2's field),
+  // if user touches anywhere on the right bottom of the canvas (player 2's field),
   // player 2 can move the paddle
   if (touch.clientY >= canvas.height/2 + 15) {
     playerTwo.x = (touch.pageX - playerTwo.width / 2);
