@@ -131,8 +131,8 @@ class Ball {
 }
 
 // CREATING PLAYERS AND BALL OBJECTS
-playerOne = new Player(0, 0, 75, 10, 0, 65, 68); // 65: left arrow, 68: right arrow
-playerTwo = new Player (0, 0, 75, 10, 0, 37, 39); // 37: a, 39: d
+playerOne = new Player(0, 0, 75, 10, 0, 65, 68); // 65: a, 68: d
+playerTwo = new Player (0, 0, 75, 10, 0, 37, 39); // 37: left arrow, 39: right arrow
 ball = new Ball(0, 0, 10, null, 3, 5, 'red');
 
 // TOUCH EVENT LISTENER
