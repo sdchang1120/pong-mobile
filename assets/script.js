@@ -17,15 +17,25 @@ var playerOne, playerTwo, ball, keyState,
 
 // PLAYER AND BALL CLASS CONSTRUCTORS
 class Player {
-  constructor(x, y, width, height, score) {
+  constructor(x, y, width, height, score, leftKey, rightKey) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.score = 0;
+    this.leftKey = leftKey;
+    this.rightKey = rightKey;
   }
   draw() {
     context.fillRect(this.x, this.y, this.width, this.height);
+  }
+  update() {
+    if (keyState[this.leftKey]) {
+      this.x -= 5
+    };
+    if (keyState[this.rightKey]) {
+      this.x += 5
+    };
   }
 }
 
@@ -121,27 +131,9 @@ class Ball {
 }
 
 // CREATING PLAYERS AND BALL OBJECTS
-playerOne = new Player(0, 0, 75, 10, 0);
-playerTwo = new Player (0, 0, 75, 10, 0);
+playerOne = new Player(0, 0, 75, 10, 0, 65, 68); // 65: left arrow, 68: right arrow
+playerTwo = new Player (0, 0, 75, 10, 0, 37, 39); // 37: a, 39: d
 ball = new Ball(0, 0, 10, null, 3, 5, 'red');
-
-playerOne.update = function() {
-  if (keyState[65]) { // a key
-    this.x -= 5
-  };
-  if (keyState[68]) { // d key
-    this.x += 5
-  };
-};
-
-playerTwo.update = function() {
-  if (keyState[37]) { // left arrow
-    this.x -= 5
-  };
-  if (keyState[39]) { // right arrow
-    this.x += 5
-  };
-};
 
 // TOUCH EVENT LISTENER
 function touchEvent(event) {
